@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<h1>Add a New Book</h1>
+
+<form action="/create_post" method="POST">
+  <label>Title</label>
+  <input type="text" name="title" required><br>
+
+  <label>Author</label>
+  <input type="text" name="author" required><br>
+
+  <label>ISBN</label>
+  <input type="text" name="isbn" required><br>
+
+  <label>Price</label>
+  <input type="number" name="price" step="0.01" required><br>
+
+  <label>Category</label>
+  <select name="categoryId">
+    {% for category in categories %}
+      <option value="{{ category['categoryId'] }}">{{ category['categoryName'] }}</option>
+    {% endfor %}
+  </select><br>
+
+  <label>Image Filename</label>
+  <input type="text" name="image" required><br>
+
+  <label>Read Now (0 or 1)</label>
+  <input type="number" name="readNow" min="0" max="1" value="0"><br>
+
+  <button type="submit">Add Book</button>
+  <a href="/read">Cancel</a>
+</form>
+{% endblock %}

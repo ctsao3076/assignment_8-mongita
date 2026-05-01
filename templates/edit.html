@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<h1>Edit Book</h1>
+
+<form action="/edit_post/{{ book.bookId }}" method="POST">
+  <label>Title</label>
+  <input type="text" name="title" value="{{ book.title }}" required><br>
+
+  <label>Author</label>
+  <input type="text" name="author" value="{{ book.author }}" required><br>
+
+  <label>ISBN</label>
+  <input type="text" name="isbn" value="{{ book.isbn }}" required><br>
+
+  <label>Price</label>
+  <input type="number" name="price" step="0.01" value="{{ book.price }}" required><br>
+
+  <label>Category</label>
+  <select name="categoryId">
+    {% for category in categories %}
+      <option value="{{ category['categoryId'] }}"
+        {% if category['categoryId'] == book.categoryId %}selected{% endif %}>
+        {{ category['categoryName'] }}
+      </option>
+    {% endfor %}
+  </select><br>
+
+  <label>Image Filename</label>
+  <input type="text" name="image" value="{{ book.image }}" required><br>
+
+  <label>Read Now (0 or 1)</label>
+  <input type="number" name="readNow" min="0" max="1" value="{{ book.readNow }}"><br>
+
+  <button type="submit">Save Changes</button>
+  <a href="/read">Cancel</a>
+</form>
+{% endblock %}
